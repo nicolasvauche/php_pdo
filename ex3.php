@@ -18,10 +18,10 @@ try {
     $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "<p>Connexion à la BDD OK :)</p>";
 
-    // Bon, on va tenter d'ajouter des données dans la table user. Avec quelques précautions quand même…
+    // Bon, on va tenter d'ajouter des données dans la table user. Proprement cette fois !
     $dbco->beginTransaction();
-    $sql = "INSERT INTO user(prenom, nom) VALUES('{$userData['prenom']}', '{$userData['nom']}');";
-    $dbco->exec($sql);
+    $req = $dbco->prepare("INSERT INTO user(prenom, nom) VALUES(:prenom, :nom);");
+    $req->execute($userData);
     $dbco->commit();
     echo "<p>{$userData['prenom']} {$userData['nom']} a été ajouté</p>";
 } catch (PDOException $e) {
