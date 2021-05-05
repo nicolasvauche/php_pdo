@@ -1,9 +1,9 @@
 <?php
 // Initialisation des variables de configuration
-$servname = 'localhost:8889';
-$dbname = 'php_test';
-$user = 'root';
-$pass = 'root';
+require_once('utils/json.php');
+if (!$dbData = fileJsonToArray('config/bdd.json')) {
+    die('Connexion à la BDD KO : Fichier de configuration incorrect ou introuvable :(');
+}
 
 // Initialisation des données exemple
 $userData = [
@@ -14,7 +14,7 @@ $userData = [
 // On sécurise une opération qui pourrait très probablement créer une exception
 try {
     // Allez, on tente la connection à la BDD, avec l'aide de PDO
-    $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
+    $dbco = new PDO("mysql:host={$dbData['servname']};dbname={$dbData['dbname']}", $dbData['user'], $dbData['pass']);
     $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "<p>Connexion à la BDD OK :)</p>";
 
