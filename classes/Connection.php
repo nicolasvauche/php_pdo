@@ -1,7 +1,4 @@
 <?php
-// Class Json is required
-require_once('utils/json.php');
-
 /**
  * Connection
  *
@@ -19,6 +16,12 @@ class Connection
      */
     public function __construct()
     {
+        if (file_exists('utils/json.php')) {
+            require_once('utils/json.php');
+        } else {
+            die('<p>Connexion à la BDD KO : Fichier de configuration introuvable :(</p>');
+        }
+
         if (!$connData = fileJsonToArray('config/bdd.json')) {
             die('<p>Connexion à la BDD KO : Format du fichier de configuration incorrect :(</p>');
         }
