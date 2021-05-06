@@ -25,17 +25,18 @@ class User extends Connection
     /**
      * User constructor
      *
-     * This function get a PDO connexion object from its parent class,
+     * This function gets a PDO connexion object from its parent class
      * If given id in the userData array : instanciates and returns an existing user from the database
      */
     public function __construct(array $userData)
     {
         $this->dbco = parent::__construct();
 
-        $this->prenom = $userData['prenom'];
-        $this->nom = $userData['nom'];
-
+        $this->prenom = isset($userData['prenom']) ? $userData['prenom'] : null;
+        $this->nom = isset($userData['nom']) ? $userData['nom'] : null;
+            
         if (isset($userData['id'])) {
+            //@TODO: return the user data from DB
             return $this;
         }
     }
