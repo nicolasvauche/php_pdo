@@ -1,4 +1,6 @@
 <?php
+require_once('utils/json.php');
+
 /**
  * Connection
  *
@@ -16,9 +18,7 @@ class Connection
      */
     public function __construct()
     {
-        if (file_exists('utils/json.php')) {
-            require_once('utils/json.php');
-        } else {
+        if (!file_exists('config/bdd.json')) {
             die('<p>Connexion à la BDD KO : Fichier de configuration introuvable :(</p>');
         }
 
