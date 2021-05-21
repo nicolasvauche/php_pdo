@@ -4,7 +4,7 @@ require_once('classes/User.php');
 
 // Initialisation des données exemple
 $userData = [
-    'id' => 2,
+    'id' => 1,
     /* 'prenom' => 'Bob',
     'nom' => 'Marley', */
 ];
