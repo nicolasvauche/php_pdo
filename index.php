@@ -4,7 +4,7 @@ require_once('classes/User.php');
 
 // Initialisation des données exemple
 $userData = [
-    'id' => 10,
+    'id' => 1,
 ];
 
 // On sécurise une opération qui pourrait très probablement créer une exception
