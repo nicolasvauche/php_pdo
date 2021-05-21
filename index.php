@@ -4,21 +4,18 @@ require_once('classes/User.php');
 
 // Initialisation des données exemple
 $userData = [
-    'id' => 1,
-    /* 'prenom' => 'Bob',
-    'nom' => 'Marley', */
+    'id' => 10,
 ];
 
 // On sécurise une opération qui pourrait très probablement créer une exception
 try {
-    // Création d'un User
-    /* $userObject = new User($userData);
-    $user = $userObject->addUser();
-    echo "<p>{$user->getPrenom()} {$user->getNom()} a été ajouté</p>"; */
-
     // Récupération d'un User
     $user = new User($userData);
-    echo "<p>{$user->getPrenom()} {$user->getNom()} a été trouvé pour l'id #{$userData['id']}</p>";
+    if ($user->getPrenom() || $user->getNom()) {
+        echo "<p>{$user->getPrenom()} {$user->getNom()} a été trouvé pour l'id #{$userData['id']}</p>";
+    } else {
+        echo "<p>Personne n'a été trouvé pour l'id #{$userData['id']}</p>";
+    }
 } catch (PDOException $e) {
     // L'exception levée par PDO est correctement captée ici
     $dbco->rollBack();

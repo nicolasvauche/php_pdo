@@ -36,7 +36,18 @@ class User extends Connection
         $this->nom = isset($userData['nom']) ? $userData['nom'] : null;
             
         if (isset($userData['id'])) {
-            //@TODO: return the user data from DB
+            $req = $this->dbco->prepare("SELECT * FROM user WHERE id=:id;");
+            $req->execute([
+                'id' => $userData['id'],
+            ]);
+            $res = $req->fetchAll(PDO::FETCH_ASSOC);
+            if (isset($res[0])) {
+                $this->prenom = $res[0]['prenom'];
+                $this->nom = $res[0]['nom'];
+            } else {
+                $this->prenom = null;
+                $this->nom = null;
+            }
             return $this;
         }
     }
